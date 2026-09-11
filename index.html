@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>open me!!</title>
+  <meta name="description" content="A playful and cute Peanuts comic-themed interactive invitation for a video call!" />
+
+  <!-- Google Fonts: Comic Neue & Fredoka for authentic Peanuts comic aesthetic -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,400;0,700;1,700&family=Fredoka:wght@400;600;700&family=Patrick+Hand&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <!-- Canvas Confetti & Hearts Layer -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- Sound Toggle Button -->
+  <button id="sound-toggle" class="comic-btn-small" aria-label="Toggle Sound" title="Nyalakan/Matikan Suara">
+    <span class="icon" id="sound-icon">🔊</span>
+  </button>
+
+  <!-- Main Comic Strip Container -->
+  <main class="comic-page">
+
+    <!-- Top Decorative Header (Charlie Brown Zig-Zag Pattern Strip) -->
+    <header class="comic-strip-header">
+      <div class="zigzag-strip"></div>
+      <div class="strip-badge">DAILY PEANUTS STRIP • SPECIAL ISSUE</div>
+    </header>
+
+    <!-- Comic Panel -->
+    <div class="comic-panel" id="main-panel">
+      <!-- Halftone Accent background -->
+      <div class="halftone-overlay"></div>
+
+      <!-- Comic Strip Date / Caption Tag -->
+      <div class="comic-tag">
+        <span class="dot"></span>
+        <span class="tag-text">Snoopy & Charlie's Mailbox 💌</span>
+      </div>
+
+      <!-- Illustration Area -->
+      <div class="illustration-container">
+        <!-- Floating hearts & music notes -->
+        <div class="floating-items">
+          <span class="float-item heart-1">❤️</span>
+          <span class="float-item heart-2">💖</span>
+          <span class="float-item note-1">🎵</span>
+          <span class="float-item star-1">✨</span>
+          <span class="float-item ring-ring">📞 Ring! Ring!</span>
+        </div>
+
+        <!-- Woodstock SVG -->
+        <div class="woodstock-wrapper" id="woodstock-wrapper" title="Woodstock!">
+          <svg class="woodstock-svg" viewBox="0 0 100 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Woodstock Hair Spikes -->
+            <path d="M48 20 C42 12 36 10 32 16 C30 19 32 23 38 24" stroke="#222" stroke-width="3"
+              stroke-linecap="round" />
+            <path d="M52 16 C48 8 42 6 38 12 C36 15 39 18 44 20" stroke="#222" stroke-width="3"
+              stroke-linecap="round" />
+            <path d="M56 22 C56 12 50 8 46 14" stroke="#222" stroke-width="3" stroke-linecap="round" />
+            <!-- Woodstock Body & Head (Yellow) -->
+            <path
+              d="M42 26 C42 22 48 18 56 18 C64 18 70 23 70 30 C70 36 65 40 58 42 C56 46 62 58 66 65 C67 67 65 72 58 72 C50 72 45 64 43 56 C40 55 36 50 36 44 C36 38 42 32 42 26 Z"
+              fill="#FED130" stroke="#222" stroke-width="3.5" stroke-linejoin="round" />
+            <!-- Eye -->
+            <circle cx="60" cy="26" r="2.5" fill="#222" />
+            <!-- Beak -->
+            <path d="M68 28 L82 32 C84 33 84 36 80 37 L67 36 Z" fill="#FED130" stroke="#222" stroke-width="3"
+              stroke-linejoin="round" />
+            <!-- Wing -->
+            <path d="M48 44 C42 46 40 53 45 57 C50 60 55 54 53 48 Z" fill="#F4B400" stroke="#222" stroke-width="3" />
+            <!-- Woodstock Tiny Legs -->
+            <path d="M48 72 L46 84 M46 84 L40 84 M46 84 L50 84" stroke="#222" stroke-width="3" stroke-linecap="round" />
+            <path d="M58 72 L60 84 M60 84 L54 84 M60 84 L64 84" stroke="#222" stroke-width="3" stroke-linecap="round" />
+          </svg>
+        </div>
+
+        <!-- Snoopy & Doghouse SVG Illustration -->
+        <div class="snoopy-wrapper" id="snoopy-wrapper">
+          <svg class="snoopy-svg" viewBox="0 0 320 250" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Doghouse Roof (Red) -->
+            <path d="M40 180 L160 90 L280 180 Z" fill="#E53935" stroke="#222" stroke-width="5"
+              stroke-linejoin="round" />
+            <!-- Doghouse Roof Peak shadow line -->
+            <path d="M160 90 L160 180" stroke="#C62828" stroke-width="4" stroke-linecap="round" />
+
+            <!-- Doghouse Body Base -->
+            <rect x="65" y="178" width="190" height="65" fill="#C62828" stroke="#222" stroke-width="5" />
+            <!-- Wood Planks Lines -->
+            <line x1="65" y1="210" x2="255" y2="210" stroke="#222" stroke-width="3.5" />
+
+            <!-- Snoopy Body (Lying down relaxed or holding retro phone) -->
+            <!-- Back & Belly (White) -->
+            <path class="snoopy-body-path"
+              d="M100 120 C100 95 125 90 150 90 C175 90 200 100 215 110 C230 120 235 135 230 145 C225 155 200 155 170 155 C135 155 105 145 100 120 Z"
+              fill="#FFFFFF" stroke="#222" stroke-width="4.5" stroke-linejoin="round" />
+
+            <!-- Snoopy Black Spot on Back -->
+            <ellipse cx="185" cy="120" rx="14" ry="11" fill="#222" />
+
+            <!-- Snoopy Feet / Paws sticking out -->
+            <path d="M215 125 C230 120 242 128 238 140 C234 148 222 148 215 142" fill="#FFFFFF" stroke="#222"
+              stroke-width="4" />
+            <path d="M228 132 L236 135" stroke="#222" stroke-width="3" stroke-linecap="round" />
+            <path d="M226 138 L233 142" stroke="#222" stroke-width="3" stroke-linecap="round" />
+
+            <!-- Snoopy Head -->
+            <g class="snoopy-head-group">
+              <!-- Head Outline -->
+              <path
+                d="M90 105 C75 105 60 90 70 70 C80 50 115 50 130 65 C145 80 140 105 115 108 C105 110 95 108 90 105 Z"
+                fill="#FFFFFF" stroke="#222" stroke-width="4.5" stroke-linejoin="round" />
+
+              <!-- Snoopy Snout / Nose -->
+              <ellipse cx="62" cy="74" rx="9" ry="7" fill="#222" />
+
+              <!-- Snoopy Eye (Sleeping/Smiling Happy Curve) -->
+              <path class="snoopy-eye" d="M94 72 C98 67 105 67 109 72" stroke="#222" stroke-width="3.5"
+                stroke-linecap="round" />
+
+              <!-- Snoopy Smile -->
+              <path d="M82 86 C88 92 98 92 104 87" stroke="#222" stroke-width="3" stroke-linecap="round" />
+
+              <!-- Snoopy Long Droopy Ear (Black) -->
+              <path class="snoopy-ear"
+                d="M122 75 C138 72 155 88 152 110 C149 126 135 130 126 120 C118 110 116 85 122 75 Z" fill="#222"
+                stroke="#222" stroke-width="2" />
+
+              <!-- Snoopy Red Collar -->
+              <path d="M120 104 C115 112 110 115 102 115" stroke="#E53935" stroke-width="6" stroke-linecap="round" />
+            </g>
+
+            <!-- Vintage Comic Phone handset in Snoopy's Paws -->
+            <g class="phone-handset-group">
+              <!-- Cord -->
+              <path d="M112 135 Q100 155 85 145 T70 160" fill="none" stroke="#222" stroke-width="3"
+                stroke-dasharray="3 3" />
+              <!-- Phone Body on Roof -->
+              <rect x="60" y="150" width="30" height="20" rx="4" fill="#FED130" stroke="#222" stroke-width="3.5" />
+              <circle cx="75" cy="160" r="4" fill="#222" />
+              <!-- Handset near Snoopy -->
+              <path d="M95 115 C90 112 88 125 93 130 L108 128 C112 125 108 114 95 115 Z" fill="#222" stroke="#222"
+                stroke-width="2" />
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Speech Bubble Question Section -->
+      <div class="speech-bubble-container">
+        <div class="comic-speech-bubble">
+          <h1 class="main-question">
+            Ayo vc deh <span class="phone-emoji">📞</span>
+          </h1>
+          <p class="subtitle">Ada banyak cerita seru yang pengen aku obrolin sama kamu hari ini! ✨</p>
+          <!-- Speech bubble tail pointer -->
+          <div class="bubble-tail"></div>
+        </div>
+      </div>
+
+      <!-- Playful Interaction Stats/Subtext -->
+      <div class="attempt-hint" id="attempt-hint">
+        Psst... jangan coba-coba tekan tombol merah ya! 😜
+      </div>
+
+      <!-- Action Buttons Container -->
+      <div class="button-arena" id="button-arena">
+        <!-- YES Button -->
+        <button id="btn-yes" class="comic-btn btn-yes" type="button">
+          <span class="btn-icon">❤️</span>
+          <span class="btn-text">YES ❤️</span>
+        </button>
+
+        <!-- NO Button (The Runaway Button) -->
+        <button id="btn-no" class="comic-btn btn-no" type="button">
+          <span class="btn-icon">😭</span>
+          <span class="btn-text">NO 😭</span>
+        </button>
+      </div>
+
+      <!-- Bottom Comic Caption -->
+      <div class="comic-footer-strip">
+        <span>★ PEANUTS HAPPINESS IS A VIDEO CALL TOGETHER ★</span>
+      </div>
+    </div>
+  </main>
+
+  <!-- Celebration Popup / Modal -->
+  <div class="modal-overlay" id="celebration-modal" aria-hidden="true">
+    <div class="modal-card">
+      <div class="modal-halftone"></div>
+
+      <!-- Close / Restart mini button -->
+      <button class="modal-close" id="btn-close-modal" aria-label="Tutup" title="Tutup Modal">✕</button>
+
+      <!-- Snoopy Happy Dancing Illustration -->
+      <div class="celebration-snoopy-box">
+        <div class="dancing-snoopy">
+          <!-- Animated Dancing Snoopy SVG -->
+          <svg viewBox="0 0 160 160" width="130" height="130" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Happy Music notes and hearts -->
+            <text x="15" y="40" font-size="20">💖</text>
+            <text x="125" y="35" font-size="20">✨</text>
+            <text x="130" y="90" font-size="18">🎶</text>
+
+            <!-- Snoopy Joy Dance Body -->
+            <path d="M50 110 C45 80 70 70 90 70 C110 70 125 85 120 115 C115 135 90 140 70 138 C55 135 50 125 50 110 Z"
+              fill="#FFFFFF" stroke="#222" stroke-width="4.5" />
+            <!-- Snoopy Spot -->
+            <circle cx="105" cy="100" r="10" fill="#222" />
+            <!-- Snoopy Head tilted happy -->
+            <g class="dance-head">
+              <path d="M70 65 C55 65 40 50 50 35 C60 20 90 22 105 35 C115 45 112 65 95 68 Z" fill="#FFFFFF"
+                stroke="#222" stroke-width="4.5" />
+              <ellipse cx="44" cy="38" rx="8" ry="6" fill="#222" />
+              <!-- Happy closed curve eyes -->
+              <path d="M72 38 C75 33 82 33 85 38" stroke="#222" stroke-width="3.5" stroke-linecap="round" />
+              <!-- Big Open Smile -->
+              <path d="M64 48 C72 58 86 56 90 47 Z" fill="#E53935" stroke="#222" stroke-width="3" />
+              <!-- Droopy Black Ear Flapping -->
+              <path class="flapping-ear" d="M102 40 C120 30 135 48 128 65 C120 75 105 60 102 40 Z" fill="#222"
+                stroke="#222" stroke-width="2" />
+              <!-- Red Collar -->
+              <path d="M85 66 C78 72 70 74 65 72" stroke="#E53935" stroke-width="5" stroke-linecap="round" />
+            </g>
+            <!-- Arms Up in Victory -->
+            <path d="M55 90 C40 75 35 65 30 70 C25 75 35 88 48 98" fill="#FFFFFF" stroke="#222" stroke-width="4" />
+            <path d="M110 95 C125 80 135 70 140 76 C145 82 130 96 115 102" fill="#FFFFFF" stroke="#222"
+              stroke-width="4" />
+            <!-- Dancing feet kicking -->
+            <path d="M60 135 L50 152 C48 156 55 158 60 155 L72 138" fill="#FFFFFF" stroke="#222" stroke-width="4" />
+            <path d="M90 136 L105 150 C110 154 116 148 112 144 L98 134" fill="#FFFFFF" stroke="#222" stroke-width="4" />
+          </svg>
+        </div>
+        <div class="woodstock-cheer">
+          <span class="cheer-bubble">Yippee!! 🐥❤️</span>
+        </div>
+      </div>
+
+      <!-- Celebration Title & Copy -->
+      <h2 class="celebration-title">YAYYY! See you on video call! ❤️📞</h2>
+
+      <p class="celebration-message">
+        Asikkk! Siap-siap ya, jangan lupa senyum termanis kamu. Snoopy dan aku udah gak sabar ketemu kamu di layar! 🥳🎉
+      </p>
+
+      <!-- Quick Action Buttons inside Modal -->
+      <div class="modal-actions">
+        <!-- Direct WhatsApp Call / Chat link -->
+        <a id="btn-whatsapp" href="https://wa.me/" target="_blank" rel="noopener noreferrer"
+          class="comic-btn modal-btn-primary">
+          <span>📲 Buka WhatsApp Sekarang</span>
+        </a>
+
+        <!-- Copy Sweet Message Button -->
+        <button id="btn-copy-msg" class="comic-btn modal-btn-secondary" type="button">
+          <span>📋 Salin Pesan Seru</span>
+        </button>
+      </div>
+
+      <!-- Toast Feedback notification -->
+      <div id="copy-toast" class="copy-toast">Pesan berhasil disalin! Kirim ke dia ya~ 💌</div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
